@@ -1,0 +1,64 @@
+post:
+  tags:
+    - Blobs
+  summary: Create Blob
+  operationId: createBlob
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            data:
+              type: object
+              $ref: '#/components/schemas/Blob'
+  responses:
+    '200':
+      description: Created successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                $ref: '#/components/schemas/Blob'
+    '404':
+      description: Not Found
+    '409':
+      description: Conflict
+    '500':
+      description: Internal Error
+
+get:
+  tags:
+    - Blobs
+  summary: Get Blobs List
+  operationId: getBlobList
+  parameters:
+    - in: query
+      name: 'filter[user_id]'
+      required: false
+      schema:
+        type: array
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Blob'
+    '204':
+      description: No content
+    '400':
+      description: Bad Request
+    '404':
+      description: Not Found
+    '500':
+      description: Internal Error
+
